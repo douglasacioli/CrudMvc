@@ -11,8 +11,10 @@ namespace CrudMvc.Controllers
         private EscolaContext db = new EscolaContext();
 
         // GET: Alunos
-        public ActionResult Index()
+        public ActionResult Index(string busca = null)
         {
+            if (busca != null)
+                return View(db.Alunos.Where(a => a.Nome.Contains(busca)).ToList());
             return View(db.Alunos.ToList());
         }
 
